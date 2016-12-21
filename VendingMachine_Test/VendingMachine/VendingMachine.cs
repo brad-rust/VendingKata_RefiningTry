@@ -10,10 +10,12 @@ namespace VendingMachine_Kata
     {
         public Display display;
         public double credit { private set; get; }
+        public CoinReturn coinReturn;
 
         public VendingMachine()
         {
             this.display = new Display();
+            this.coinReturn = new CoinReturn();
         }
 
         public void insertCoin(string coin)

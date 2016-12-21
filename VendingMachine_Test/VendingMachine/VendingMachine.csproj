@@ -7,7 +7,7 @@
     <ProjectGuid>{09D42949-17C8-466D-B60A-A885214AB764}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VendingMachine</RootNamespace>
+    <RootNamespace>VendingMachine_Kata</RootNamespace>
     <AssemblyName>VendingMachine</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoinReturn.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="VendingMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
