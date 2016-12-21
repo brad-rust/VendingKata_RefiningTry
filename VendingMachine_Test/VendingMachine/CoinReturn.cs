@@ -17,9 +17,13 @@ namespace VendingMachine_Kata
 
         public List<string> slot()
         {
-            coins.Add("quarter");
-            coins.Add("dime");
             return coins;
         }
+
+        public void placeCoinInSlot(Coin coin)
+        {
+            this.coins.Add(coin.name);
+        }
+
     }
 }

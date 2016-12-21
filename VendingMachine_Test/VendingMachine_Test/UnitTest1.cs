@@ -33,7 +33,7 @@ namespace VendingMachine_Test
         {
             VendingMachine vm = new VendingMachine();
             vm.insertCoin("wooden nickel");
-            List<string> coins = new List<string>() { sQuarter, sDime };
+            List<string> coins = new List<string>() { "wooden nickel" };
             CollectionAssert.AreEqual(coins, vm.coinReturn.slot());
         }
     }

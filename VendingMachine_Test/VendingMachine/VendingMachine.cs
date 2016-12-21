@@ -18,10 +18,16 @@ namespace VendingMachine_Kata
             this.coinReturn = new CoinReturn();
         }
 
-        public void insertCoin(string coin)
+        public void insertCoin(string _coin)
         {
-            this.credit = .25;
-            this.display.changeMessageToCoinsInserted(this.credit);
+            Coin coin = new Coin(_coin);
+            if (coin.value > 0)
+            {
+                this.credit += coin.value;
+                this.display.changeMessageToCoinsInserted(this.credit);
+            }
+            else
+                this.coinReturn.placeCoinInSlot(coin);
         }
     }
 }
