@@ -11,11 +11,13 @@ namespace VendingMachine_Kata
         public Display display;
         public double credit { private set; get; }
         public CoinReturn coinReturn;
-
+        public Dispenser dispenser;
         public VendingMachine()
         {
             this.display = new Display();
             this.coinReturn = new CoinReturn();
+            this.dispenser = new Dispenser();
+
         }
 
         public void insertCoin(string _coin)
@@ -28,6 +30,11 @@ namespace VendingMachine_Kata
             }
             else
                 this.coinReturn.placeCoinInSlot(coin);
+        }
+
+        public void pressButton(string item)
+        {
+            this.dispenser.addContentsToDispenser(item);
         }
     }
 }

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Coin.cs" />
     <Compile Include="CoinReturn.cs" />
+    <Compile Include="Dispenser.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="VendingMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

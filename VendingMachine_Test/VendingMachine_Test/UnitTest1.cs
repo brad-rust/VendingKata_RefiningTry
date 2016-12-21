@@ -36,5 +36,22 @@ namespace VendingMachine_Test
             List<string> coins = new List<string>() { "wooden nickel" };
             CollectionAssert.AreEqual(coins, vm.coinReturn.slot());
         }
+
+        [TestMethod]
+        public void whenSufficientAmountOfMoneyIsInsertedAndTheProductButtonIsPressed_theMachinePlacesTheProductIntoTheDespenser()
+        {
+            VendingMachine vm = place2QuartersInMachine();
+            vm.pressButton("chips");
+            List<string> contents = new List<string> { "chips" };
+            CollectionAssert.AreEqual(vm.dispenser.contents(), contents);
+        }
+
+        private VendingMachine place2QuartersInMachine()
+        {
+            VendingMachine vm = new VendingMachine();
+            vm.insertCoin(sQuarter);
+            vm.insertCoin(sQuarter);
+            return vm;
+        }
     }
 }
