@@ -11,10 +11,15 @@ namespace VendingMachine_Kata
         public string message { private set; get; }
 
         private const string insertCoin = "INSERT COIN";
-
+        
         public Display()
         {
             this.message = insertCoin;
+        }
+
+        public void changeMessageToCoinsInserted(double coinsInserted)
+        {
+            this.message = coinsInserted.ToString("0.00");
         }
     }
 }
