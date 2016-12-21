@@ -8,6 +8,11 @@ namespace VendingMachine_Kata
 {
     public class VendingMachine
     {
-        public string display = "INSERT COIN";
+        public Display display;
+
+        public VendingMachine()
+        {
+            this.display = new Display();
+        }
     }
 }

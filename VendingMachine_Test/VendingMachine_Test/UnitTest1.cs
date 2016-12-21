@@ -12,7 +12,7 @@ namespace VendingMachine_Test
         public void whenNoCoinsHaveBeenInserted_displayReadsInsertCoin()
         {
             VendingMachine vm = new VendingMachine();
-            Assert.AreEqual(vm.display, "INSERT COIN");
+            Assert.AreEqual(vm.display.message, "INSERT COIN");
         }
     }
 }
