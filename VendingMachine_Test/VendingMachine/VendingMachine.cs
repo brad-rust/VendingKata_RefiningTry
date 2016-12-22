@@ -55,8 +55,12 @@ namespace VendingMachine_Kata
         private void tryVend(Button button)
         {
             Product product = Product.getProduct(button);
-            if (this.credit >= product.value)
+            if (this.credit >= product.cost)
+            {
                 this.dispenser.addContentsToDispenser(button.ToString());
+                this.credit -= product.cost;
+                makeChange();
+            }
         }
 
         private void returnCoins()
@@ -68,7 +72,13 @@ namespace VendingMachine_Kata
 
         public List<string> coinReturnSlot()
         {
-            return _coinReturn.slot();
+            return this._coinReturn.slot();
+        }
+
+        private void makeChange()
+        {
+            if (this.credit > .04)
+                this._coinReturn.placeCoinInSlot(Coin.Dime);
         }
     }
 }

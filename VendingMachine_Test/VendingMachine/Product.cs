@@ -9,7 +9,7 @@ namespace VendingMachine_Kata
     public class Product
     {
         public readonly string name;
-        public readonly double value;
+        public readonly double cost;
 
         private const string sChips = "chips";
         private const string sCola = "cola";
@@ -26,7 +26,7 @@ namespace VendingMachine_Kata
         private Product(string productName)
         {
             this.name = productName;
-            this.value = productValues[productName];
+            this.cost = productValues[productName];
         }
 
         public static Product getProduct(Button button)

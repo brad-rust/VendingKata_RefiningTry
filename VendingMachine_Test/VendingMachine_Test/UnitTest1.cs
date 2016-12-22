@@ -71,7 +71,8 @@ namespace VendingMachine_Test
         {
             VendingMachine vm = place75centsIntoMachine();
             vm.pressButton(vm.Button.Candy);
-            
+            List<string> returnedCoins = new List<string> { sDime };
+            CollectionAssert.AreEqual(vm.coinReturnSlot(), returnedCoins);
         }
 
         private VendingMachine place2QuartersInMachine()
