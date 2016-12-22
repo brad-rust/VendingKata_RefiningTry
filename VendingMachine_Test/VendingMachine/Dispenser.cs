@@ -24,5 +24,16 @@ namespace VendingMachine_Kata
         {
             this.dispenserList.Add(item);
         }
+        
+        public string removeContents()
+        {
+            string item = string.Empty;
+            if (dispenserList.Count > 0)
+            {
+                item = dispenserList[0];
+                dispenserList.Remove(dispenserList[0]);
+            }
+            return item;
+        }
     }
 }

@@ -46,9 +46,28 @@ namespace VendingMachine_Test
             CollectionAssert.AreEqual(vm.dispenser.contents(), contents);
         }
 
+        [TestMethod]
+        public void whenContentsAreRemovedFromDispenser_dispenserIsEmpty()
+        {
+            VendingMachine vm = place2QuartersInMachine();
+            vm.pressButton(vm.chipsButton);
+            List<string> contents = new List<string>();
+            string item = vm.dispenser.removeContents();
+            Assert.AreEqual(item, vm.chips.ToString());
+            CollectionAssert.AreEqual(contents, vm.dispenser.contents());
+        }
+
         private VendingMachine place2QuartersInMachine()
         {
             VendingMachine vm = new VendingMachine();
+            vm.insertCoin(sQuarter);
+            vm.insertCoin(sQuarter);
+            return vm;
+        }
+
+        private VendingMachine placeOneDollarInMachine()
+        {
+            VendingMachine vm = place2QuartersInMachine();
             vm.insertCoin(sQuarter);
             vm.insertCoin(sQuarter);
             return vm;

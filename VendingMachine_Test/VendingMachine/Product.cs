@@ -33,5 +33,10 @@ namespace VendingMachine_Kata
         {
             return products[button.ToString()];
         }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }
