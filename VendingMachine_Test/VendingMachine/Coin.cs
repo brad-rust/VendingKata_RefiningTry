@@ -25,5 +25,15 @@ namespace VendingMachine_Kata
         public readonly static Coin Quarter = new Coin(quarter);
         public readonly static Coin Dime = new Coin(dime);
         public readonly static Coin Nickel = new Coin(nickel);
+
+        public static Coin getLargestCoinPossibleToMakeChange(double credit)
+        {
+            if (credit >= Quarter.value)
+                return Quarter;
+            else if (credit >= Dime.value)
+                return Dime;
+            else
+                return Nickel;
+        }
     }
 }

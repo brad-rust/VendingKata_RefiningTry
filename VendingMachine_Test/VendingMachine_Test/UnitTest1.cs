@@ -70,8 +70,9 @@ namespace VendingMachine_Test
         public void whenMoreMoneyIsInsertedThanTheItemCosts_machineGivesBackCorrectAmountOfChange()
         {
             VendingMachine vm = place75centsIntoMachine();
+            vm.insertCoin(sNickel);
             vm.pressButton(vm.Button.Candy);
-            List<string> returnedCoins = new List<string> { sDime };
+            List<string> returnedCoins = new List<string> { sDime, sNickel };
             CollectionAssert.AreEqual(vm.coinReturnSlot(), returnedCoins);
         }
 

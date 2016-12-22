@@ -29,6 +29,7 @@ namespace VendingMachine_Kata
             this.dispenser = new Dispenser();
             this.insertedCoins = new List<Coin>();
             this.Button = new Button();
+
         }
 
         public void insertCoin(string _coin)
@@ -77,8 +78,12 @@ namespace VendingMachine_Kata
 
         private void makeChange()
         {
-            if (this.credit > .04)
-                this._coinReturn.placeCoinInSlot(Coin.Dime);
+            while (this.credit > .04)
+            {
+                Coin coin = Coin.getLargestCoinPossibleToMakeChange(this.credit);
+                this._coinReturn.placeCoinInSlot(coin);
+                this.credit -= coin.value;
+            }            
         }
     }
 }
