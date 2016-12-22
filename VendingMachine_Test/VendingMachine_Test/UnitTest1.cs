@@ -34,14 +34,14 @@ namespace VendingMachine_Test
             VendingMachine vm = new VendingMachine();
             vm.insertCoin("wooden nickel");
             List<string> coins = new List<string>() { "wooden nickel" };
-            CollectionAssert.AreEqual(coins, vm.coinReturn.slot());
+            CollectionAssert.AreEqual(coins, vm.coinReturnSlot());
         }
 
         [TestMethod]
         public void whenSufficientAmountOfMoneyIsInsertedAndTheProductButtonIsPressed_theMachinePlacesTheProductIntoTheDespenser()
         {
             VendingMachine vm = place2QuartersInMachine();
-            vm.pressButton(vm.chipsButton);
+            vm.pressButton(vm.Button.Chips);
             List<string> contents = new List<string> { "chips" };
             CollectionAssert.AreEqual(vm.dispenser.contents(), contents);
         }
@@ -50,17 +50,41 @@ namespace VendingMachine_Test
         public void whenContentsAreRemovedFromDispenser_dispenserIsEmpty()
         {
             VendingMachine vm = place2QuartersInMachine();
-            vm.pressButton(vm.chipsButton);
+            vm.pressButton(vm.Button.Chips);
             List<string> contents = new List<string>();
             string item = vm.dispenser.removeContents();
             Assert.AreEqual(item, vm.chips.ToString());
             CollectionAssert.AreEqual(contents, vm.dispenser.contents());
         }
 
+        [TestMethod]
+        public void whenReturnCoinsButtonIsPressed_machineReturnsCoinsToCoinReturnSlot()
+        {
+            VendingMachine vm = place2QuartersInMachine();
+            vm.pressButton(vm.Button.ReturnCoins);
+            List<string> coins = new List<string> { sQuarter, sQuarter };
+            CollectionAssert.AreEqual(coins, vm.coinReturnSlot());
+        }
+
+        [TestMethod]
+        public void whenMoreMoneyIsInsertedThanTheItemCosts_machineGivesBackCorrectAmountOfChange()
+        {
+            VendingMachine vm = place75centsIntoMachine();
+            vm.pressButton(vm.Button.Candy);
+            
+        }
+
         private VendingMachine place2QuartersInMachine()
         {
             VendingMachine vm = new VendingMachine();
             vm.insertCoin(sQuarter);
+            vm.insertCoin(sQuarter);
+            return vm;
+        }
+
+        private VendingMachine place75centsIntoMachine()
+        {
+            VendingMachine vm = place2QuartersInMachine();
             vm.insertCoin(sQuarter);
             return vm;
         }

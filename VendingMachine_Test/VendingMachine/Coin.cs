@@ -21,5 +21,9 @@ namespace VendingMachine_Kata
             validCoins.TryGetValue(this.name, out tempVal);
             this.value = tempVal;
         }
+
+        public readonly static Coin Quarter = new Coin(quarter);
+        public readonly static Coin Dime = new Coin(dime);
+        public readonly static Coin Nickel = new Coin(nickel);
     }
 }

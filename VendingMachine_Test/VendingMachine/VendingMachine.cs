@@ -10,24 +10,25 @@ namespace VendingMachine_Kata
     {
         public Display display;
         public double credit { private set; get; }
-        public CoinReturn coinReturn;
+        private CoinReturn _coinReturn;
         public Dispenser dispenser;
-        public Button button;
 
-        public Button chipsButton = Button.Chips;
-        public Button colaButton = Button.Cola;
-        public Button candyButton = Button.Candy;
+        public readonly Button Button;
 
         public Product chips = Product.chips;
         public Product candy = Product.candy;
         public Product cola = Product.cola;
 
+        private List<Coin> insertedCoins;
+
+
         public VendingMachine()
         {
             this.display = new Display();
-            this.coinReturn = new CoinReturn();
+            this._coinReturn = new CoinReturn();
             this.dispenser = new Dispenser();
-
+            this.insertedCoins = new List<Coin>();
+            this.Button = new Button();
         }
 
         public void insertCoin(string _coin)
@@ -37,16 +38,37 @@ namespace VendingMachine_Kata
             {
                 this.credit += coin.value;
                 this.display.changeMessageToCoinsInserted(this.credit);
+                this.insertedCoins.Add(coin);
             }
             else
-                this.coinReturn.placeCoinInSlot(coin);
+                this._coinReturn.placeCoinInSlot(coin);
         }
 
         public void pressButton(Button button)
         {
+            if (button == Button.ReturnCoins)
+                returnCoins();
+            else
+                tryVend(button);
+        }
+        
+        private void tryVend(Button button)
+        {
             Product product = Product.getProduct(button);
             if (this.credit >= product.value)
                 this.dispenser.addContentsToDispenser(button.ToString());
+        }
+
+        private void returnCoins()
+        {
+            this.credit = 0;
+            foreach (Coin coin in insertedCoins)
+                this._coinReturn.placeCoinInSlot(coin);
+        }
+
+        public List<string> coinReturnSlot()
+        {
+            return _coinReturn.slot();
         }
     }
 }

@@ -6,24 +6,38 @@ using System.Threading.Tasks;
 
 namespace VendingMachine_Kata
 {
-    public sealed class Button
+    public class Button
     {
-        private readonly string name;
-        private readonly int value;
+        private readonly string _name;
+        private readonly int _value;
 
-        public static readonly Button Chips = new Button("chips", 0);
-        public static readonly Button Candy = new Button("candy", 1);
-        public static readonly Button Cola = new Button("cola", 2);
+        public readonly Button Chips;
+        public readonly Button Candy;
+        public readonly Button Cola;
+        public readonly Button ReturnCoins;
 
+        public Button()
+        {
+            Chips = new Button("chips", 0);
+            Candy = new Button("candy", 1);
+            Cola = new Button("cola", 2);
+            ReturnCoins = new Button("return", 3);
+        }
+    
         private Button(string name, int val)
         {
-            this.name = name;
-            this.value = val;
+            this._name = name;
+            this._value = val;
         }
 
         public override string ToString()
         {
-            return name;
+            return _name;
+        }
+
+        public int value()
+        {
+            return this._value;
         }
 
     }
