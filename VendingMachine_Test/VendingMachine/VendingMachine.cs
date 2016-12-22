@@ -15,10 +15,7 @@ namespace VendingMachine_Kata
 
         public readonly Button Button;
 
-        public Product chips = Product.chips;
-        public Product candy = Product.candy;
-        public Product cola = Product.cola;
-
+        public Products products;
         private List<Coin> insertedCoins;
 
 
@@ -29,7 +26,7 @@ namespace VendingMachine_Kata
             this.dispenser = new Dispenser();
             this.insertedCoins = new List<Coin>();
             this.Button = new Button();
-
+            this.products = new Products();
         }
 
         public void insertCoin(string _coin)
@@ -50,18 +47,27 @@ namespace VendingMachine_Kata
             if (button == Button.ReturnCoins)
                 returnCoins();
             else
-                tryVend(button);
+                pressProductButton(button);
         }
         
-        private void tryVend(Button button)
+        private void pressProductButton(Button button)
         {
-            Product product = Product.getProduct(button);
-            if (this.credit >= product.cost)
+            Product product = products.getProduct(button.ToString());
+            if (product.subtractVendedProduct())
             {
-                this.dispenser.addContentsToDispenser(button.ToString());
-                this.credit -= product.cost;
-                makeChange();
+                if (this.credit >= product.cost)
+                    vend(product, button);
             }
+            else
+                this.display.changeMessageToSoldOut();
+                    
+        }
+
+        private void vend(Product product, Button button)
+        {
+            this.dispenser.addContentsToDispenser(button.ToString());
+            this.credit -= product.cost;
+            makeChange();
         }
 
         private void returnCoins()
@@ -84,6 +90,12 @@ namespace VendingMachine_Kata
                 this._coinReturn.placeCoinInSlot(coin);
                 this.credit -= coin.value;
             }            
+        }
+
+        public void stockProduct(string productName, int qty)
+        {
+            Product product = this.products.getProduct(productName);
+            product.putProductInInventory(qty);
         }
     }
 }

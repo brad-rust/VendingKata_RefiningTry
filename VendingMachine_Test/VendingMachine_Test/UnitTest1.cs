@@ -41,6 +41,7 @@ namespace VendingMachine_Test
         public void whenSufficientAmountOfMoneyIsInsertedAndTheProductButtonIsPressed_theMachinePlacesTheProductIntoTheDespenser()
         {
             VendingMachine vm = place2QuartersInMachine();
+            stockCandyAndChips(vm);
             vm.pressButton(vm.Button.Chips);
             List<string> contents = new List<string> { "chips" };
             CollectionAssert.AreEqual(vm.dispenser.contents(), contents);
@@ -50,10 +51,11 @@ namespace VendingMachine_Test
         public void whenContentsAreRemovedFromDispenser_dispenserIsEmpty()
         {
             VendingMachine vm = place2QuartersInMachine();
+            stockCandyAndChips(vm);
             vm.pressButton(vm.Button.Chips);
             List<string> contents = new List<string>();
             string item = vm.dispenser.removeContents();
-            Assert.AreEqual(item, vm.chips.ToString());
+            Assert.AreEqual(item, vm.Button.Chips.ToString());
             CollectionAssert.AreEqual(contents, vm.dispenser.contents());
         }
 
@@ -71,9 +73,21 @@ namespace VendingMachine_Test
         {
             VendingMachine vm = place75centsIntoMachine();
             vm.insertCoin(sNickel);
+            stockCandyAndChips(vm);
             vm.pressButton(vm.Button.Candy);
             List<string> returnedCoins = new List<string> { sDime, sNickel };
             CollectionAssert.AreEqual(vm.coinReturnSlot(), returnedCoins);
+        }
+
+        [TestMethod]
+        public void whenSelectedItemIsUnavailable_machineDisplaysSoldOutMessage()
+        {
+            //this test requires that we know how much inventory we have on hand. 
+            //in order for us to not break the prior tests, we will implement a private helper method that stocks the vending
+            //machine, then deplete the machine inventory in order to implement this test. This requires at least two phases/commits
+            VendingMachine vm = placeOneDollarInMachine();
+            vm.pressButton(vm.Button.Cola);
+            Assert.AreEqual(vm.display.message, "SOLD OUT");
         }
 
         private VendingMachine place2QuartersInMachine()
@@ -97,6 +111,12 @@ namespace VendingMachine_Test
             vm.insertCoin(sQuarter);
             vm.insertCoin(sQuarter);
             return vm;
+        }
+
+        private void stockCandyAndChips(VendingMachine vm)
+        {
+            vm.stockProduct(Product.Chips, 1);
+            vm.stockProduct(Product.Candy, 1);
         }
     }
 }

@@ -11,7 +11,8 @@ namespace VendingMachine_Kata
         public string message { private set; get; }
 
         private const string insertCoin = "INSERT COIN";
-        
+        private const string soldOut = "SOLD OUT";
+
         public Display()
         {
             this.message = insertCoin;
@@ -20,6 +21,11 @@ namespace VendingMachine_Kata
         public void changeMessageToCoinsInserted(double coinsInserted)
         {
             this.message = coinsInserted.ToString("0.00");
+        }
+
+        public void changeMessageToSoldOut()
+        {
+            this.message = soldOut;
         }
     }
 }
