@@ -41,7 +41,7 @@ namespace VendingMachine_Test
         public void whenSufficientAmountOfMoneyIsInsertedAndTheProductButtonIsPressed_theMachinePlacesTheProductIntoTheDespenser()
         {
             VendingMachine vm = place2QuartersInMachine();
-            vm.pressButton("chips");
+            vm.pressButton(vm.chipsButton);
             List<string> contents = new List<string> { "chips" };
             CollectionAssert.AreEqual(vm.dispenser.contents(), contents);
         }
